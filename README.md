@@ -1,5 +1,7 @@
 # YouTube Video Summarizer
 
+![summarizer](https://github.com/Yusra-Zafar/YT-video-summarizer/assets/141744510/081cfc8b-a0ec-460e-84b2-da667d6ba349)
+
 This tool enables users to summarize YouTube videos by providing a link to the video. It utilizes natural language processing (NLP) techniques to extract the transcript of the video and generate a concise summary.
 
 ## Limitations
@@ -29,4 +31,4 @@ Here's an example of how to use the tool:
 1. Input: `https://www.youtube.com/watch?v=[video_id]`
 2. Click "Generate Transcript" and wait for the transcript to be displayed.
 3. Click "Summarize" to generate the summary of the video.
-4. ![summarizer](https://github.com/Yusra-Zafar/YT-video-summarizer/assets/141744510/081cfc8b-a0ec-460e-84b2-da667d6ba349)
+
