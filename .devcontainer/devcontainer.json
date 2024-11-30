@@ -6,7 +6,8 @@
     "codespaces": {
       "openFiles": [
         "README.md",
-        "summarizer.py"
+        "summarizer.py",
+        "cis5810_final_project.py"
       ]
     },
     "vscode": {
