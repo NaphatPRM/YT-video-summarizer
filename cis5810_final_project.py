@@ -127,7 +127,6 @@ def get_needed_frame(video_target):
 
 ## Snapshot Summarization API
 ## Plan : Capture the start point of the video to grab on the settings
-# OpenAI API Key
 def encode_image(image_path):
   """
     Encoding the image from the local that it could work with the ChatGPT API.
