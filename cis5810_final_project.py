@@ -4,6 +4,8 @@ import streamlit as st
 import numpy as np
 import tempfile
 import cv2
+import matplotlib.pyplot as plt
+
 cv2.Mat = np.typing.NDArray[np.uint8]
 from scenedetect import detect, AdaptiveDetector, split_video_ffmpeg
 
@@ -211,7 +213,7 @@ def object_detection(first_frame):
   results = model.predict(source=first_frame, conf=0.5)
 
   # Converting the image to the numpy array
-  img = cv2.imread(first_frame)
+  img = plt.imread(first_frame)
   st.text(img)
 
   # Running through to get the object
@@ -392,8 +394,8 @@ def ransac_homography(p1, p2):
 
 def matrix_analysis(first_frame, last_frame):
   # load images in OpenCV BGR format
-  I1 = cv2.imread(first_frame)
-  I2 = cv2.imread(last_frame)
+  I1 = plt.imread(first_frame)
+  I2 = plt.imread(last_frame)
 
   # create grayscale images
   I1_gray = cv2.cvtColor(I1, cv2.COLOR_BGR2GRAY)
@@ -538,7 +540,7 @@ def camera_action(file_path):
 
 # import the necessary packages
 def find_marker(image_name):
-	image = cv2.imread(image_name)
+	image = plt.imread(image_name)
 	# convert the image to grayscale, blur it, and detect edges
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (5, 5), 0)
