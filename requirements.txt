@@ -1,14 +1,12 @@
 streamlit
 streamlit-aggrid
-ffmpeg
 numpy
 opencv-contrib-python-headless
 scenedetect[opencv-headless]
-tf-keras
 ultralytics
 deepface
 SpeechRecognition
 pyav
 imutils
-transformers
 moviepy==0.2.3.3 
+transformers==4.46.3

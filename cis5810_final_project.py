@@ -519,7 +519,7 @@ def camera_action(file_path):
     indices = sample_frame_indices(clip_len=16, frame_sample_rate=1, seg_len=container.streams.video[0].frames)
     video = list(read_video_pyav(container, indices))
 
-    processor = VideoMAEImageProcessor.from_pretrained("MCG-NJU/videomae-base-finetuned-kinetics")
+    processor = VideoMAEImageProcessor.from_pretrained("MCG-NJU/videomae-base-finetuned-kinetics", attn_implementation="sdpa",)
     model = VideoMAEForVideoClassification.from_pretrained("MCG-NJU/videomae-base-finetuned-kinetics")
 
     inputs = processor(list(video), return_tensors="pt")
