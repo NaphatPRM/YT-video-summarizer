@@ -10,7 +10,6 @@ from scenedetect import detect, AdaptiveDetector, split_video_ffmpeg
 ## Part 1.5 : ChatGPT Baseline Testing
 import base64
 import requests
-from transformers import pipeline
 
 ## Part 2 : Object and Character Detection
 from ultralytics import YOLO
@@ -21,8 +20,6 @@ HOME = os.getcwd()
 ## Part 3 : Emotion Analysis
 from deepface import DeepFace
 
-## Part 4 : Background Analysis
-from transformers import pipeline
 
 ## Part 5 : Camera Analysis
 ### 5.1
@@ -189,12 +186,6 @@ def human_description(image_path, api_key):
 
   return r["choices"][0]["message"]["content"]
 
-
-## Second Approach : How about picking the HuggingFace instead?
-def overall_analysis(image_check):
-  captioner = pipeline("image-to-text", model="Salesforce/blip-image-captioning-base")
-  dict_result = captioner(image_check)
-  return dict_result[0]["generated_text"]
 
 # Object Semantic Segmentation and detecting the face
 # Define a function of saving the picture of image

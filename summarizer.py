@@ -66,7 +66,7 @@ st.title("Visual-based Video Summarization")
 
 
 st.subheader("Upload API Key")
-api_key = st.text_input("Enter API:", placeholder="API-key")
+api_key = st.text_input("Enter API Key:", placeholder="API-key")
 
 
 st.subheader("Upload Options")
