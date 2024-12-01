@@ -4,6 +4,7 @@ numpy
 opencv-contrib-python-headless
 scenedetect[opencv-headless]
 tf-keras
+ffmpeg
 ultralytics
 deepface
 SpeechRecognition
