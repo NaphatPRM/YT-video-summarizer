@@ -9,5 +9,5 @@ deepface
 SpeechRecognition
 pyav
 imutils
-transformers[tf-cpu]
+transformers
 moviepy==0.2.3.3 
