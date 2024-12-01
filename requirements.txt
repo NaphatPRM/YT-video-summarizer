@@ -1,6 +1,7 @@
 streamlit
 streamlit-aggrid
 numpy
+tf-keras
 opencv-contrib-python-headless
 scenedetect[opencv-headless]
 ultralytics
