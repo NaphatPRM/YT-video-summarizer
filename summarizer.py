@@ -64,8 +64,10 @@ def save_uploaded_file(uploaded_file):
 # Streamlit app
 st.title("Visual-based Video Summarization")
 
-st.subheader("Parameter Upload")
-api_key = st.text_input("Enter API Key:", placeholder="api-key")
+
+st.subheader("Upload API Key")
+api_key = st.text_input("Enter API Key:", placeholder="API-key")
+
 
 st.subheader("Upload Options")
 st.write("### 1. Upload Video from YouTube")
