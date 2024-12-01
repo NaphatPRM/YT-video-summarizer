@@ -66,7 +66,7 @@ st.title("Visual-based Video Summarization")
 
 
 st.subheader("Upload API Key")
-api_key = st.text_input("Enter API Key:", placeholder="API-key")
+api_key = st.text_input("Enter API:", placeholder="API-key")
 
 
 st.subheader("Upload Options")
@@ -106,7 +106,7 @@ if st.button("Summarize"):
 
         if file_name:
             # Run video summarization and cache results
-            summary = video_summarization(file_name)
+            summary = video_summarization(file_name, api_key)
             st.session_state.video_summary = summary
             st.session_state.file_name = file_name
             st.success("Video summarized successfully!")
