@@ -212,7 +212,6 @@ def object_detection(first_frame):
 
   # Converting the image to the numpy array
   img = cv2.imread(first_frame)
-  st.text(img)
 
   # Running through to get the object
   # Initialize the data
