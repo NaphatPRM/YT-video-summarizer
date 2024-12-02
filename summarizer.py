@@ -2,7 +2,7 @@ import streamlit as st
 import os
 from cis5810_final_project import video_summarization
 from PIL import Image
-
+    
 # Define display functions
 def display_video_camera(list_total_result):
     st.write("### Camera Language Results")
@@ -68,13 +68,8 @@ st.title("Visual-based Video Summarization")
 st.subheader("Upload API Key")
 api_key = st.text_input("Enter API Key:", placeholder="API-key")
 
-
-st.subheader("Upload Options")
-st.write("### 1. Upload Video from YouTube")
-youtube_url = st.text_input("Enter YouTube URL:", placeholder="https://www.youtube.com/watch?v=example")
-
 st.write("---")
-st.write("### 2. Upload Local Video File")
+st.subheader("Upload Local Video File")
 uploaded_file = st.file_uploader("Choose a video file", type=["mp4", "avi", "mkv", "mov"])
 
 st.write("---")
@@ -89,20 +84,13 @@ if "video_summary" not in st.session_state:
     st.session_state.file_name = None      # Cache for the file being processed
 
 if st.button("Summarize"):
-    if youtube_url and uploaded_file:
-        st.warning("Please select only one option: YouTube URL or Local File.")
-    elif not youtube_url and not uploaded_file:
-        st.error("Please provide either a YouTube URL or upload a local video.")
+    if not uploaded_file:
+        st.error("Please provide a local video to process.")
     else:
         file_name = None
-        if youtube_url:
-            st.success(f"Processing YouTube video from URL: {youtube_url}")
-            file_name = "youtube_video.mp4"  # Placeholder for the downloaded video
-            st.info("Video downloaded successfully.")
-        elif uploaded_file:
-            file_name = save_uploaded_file(uploaded_file)
-            if file_name:
-                st.success(f"Processing local video file: {uploaded_file.name}")
+        file_name = save_uploaded_file(uploaded_file)
+        if file_name:
+            st.success(f"Processing local video file: {uploaded_file.name}")
 
         if file_name:
             # Run video summarization and cache results
@@ -116,3 +104,4 @@ if st.session_state.video_summary:
     st.write("### Display Summarization")
     display_summary = display_video_camera if is_camera else display_video_summary
     display_summary(st.session_state.video_summary)
+
