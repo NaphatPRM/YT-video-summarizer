@@ -6,17 +6,21 @@ from PIL import Image
 # Define display functions
 def display_video_camera(list_total_result):
     st.write("### Camera Language Results")
-    col1, col2, col3 = st.columns([1.5, 3, 2.5])
+    col1, col2, col3, col4, col5 = st.columns([1.5, 1.5, 1.5, 3, 2.5])
     with col1:
         st.markdown("**First Frame**")
     with col2:
-        st.markdown("**Camera Movement Description**")
+        st.markdown("**Start Time**")
     with col3:
+        st.markdown("**End Time**")
+    with col4:
+        st.markdown("**Camera Movement Description**")
+    with col5:
         st.markdown("**Camera Focal Length**")
 
     for result in list_total_result:
-        first_frame, _, camera_move_description, camera_focal_length_description = result
-        col1, col2, col3 = st.columns([1.5, 3, 2.5])
+        start_time, end_time, first_frame, _, camera_move_description, camera_focal_length_description = result
+        col1, col2, col3, col4, col5 = st.columns([1.5, 1.5, 1.5, 3, 2.5])
         with col1:
             try:
                 image = Image.open(first_frame)
@@ -24,21 +28,29 @@ def display_video_camera(list_total_result):
             except Exception as e:
                 st.error(f"Error loading image: {e}")
         with col2:
-            st.write(camera_move_description)
+            st.write(round(start_time, 2))
         with col3:
+            st.write(round(end_time, 2))
+        with col4:
+            st.write(camera_move_description)
+        with col5:
             st.write(camera_focal_length_description)
 
 def display_video_summary(list_total_result):
     st.write("### Video Summarization Results")
-    col1, col2 = st.columns([1.5, 3])
+    col1, col2, col3, col4 = st.columns([1.5, 1.5, 1.5, 3])
     with col1:
         st.markdown("**First Frame**")
     with col2:
+        st.markdown("**Start Time**")
+    with col3:
+        st.markdown("**End Time**")
+    with col4:
         st.markdown("**Image Description**")
 
     for result in list_total_result:
-        first_frame, image_summary, _, _ = result
-        col1, col2 = st.columns([1.5, 3])
+        start_time, end_time, first_frame, image_summary, _, _ = result
+        col1, col2, col3, col4 = st.columns([1.5, 1.5, 1.5, 3])
         with col1:
             try:
                 image = Image.open(first_frame)
@@ -46,6 +58,10 @@ def display_video_summary(list_total_result):
             except Exception as e:
                 st.error(f"Error loading image: {e}")
         with col2:
+            st.write(round(start_time, 2))
+        with col3:
+            st.write(round(end_time, 2))
+        with col4:
             st.write(image_summary)
 
 # Utility functions

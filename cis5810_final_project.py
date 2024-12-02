@@ -70,7 +70,7 @@ def splitting_video(video_path, detector):
 
     ## Add the video list name
     list_name_video.append(video_path.split("/")[1].split(".")[0] + "-Scene-" + number + ".mp4")
-  return list_name_video
+  return scene_list, list_name_video
 # splitting_video("/content/drive/MyDrive/CIS_5810/Final_Project/dolly_zoom.mp4", AdaptiveDetector())
 
 def save_uploaded_file(image, filename):
@@ -562,7 +562,7 @@ def camera_focal_length(first_frame):
   # the focal length
   marker = find_marker(first_frame)
   focalLength = (marker[1][0] * KNOWN_DISTANCE) / KNOWN_WIDTH
-  return focalLength
+  return round(focalLength, 2)
 
 ## Flair? : Adding Video Speech to Text + Timestamp?
 ## Use Off-the-shelf due to the part is unrelated to the Computer Vision
@@ -627,13 +627,14 @@ def final_summary(check, api_key):
   return r["choices"][0]["message"]["content"]
 
 ## Function for the one snippet
-def one_snippet_check(video_target, api_key):
+def one_snippet_check(video_target, time_pair, api_key):
   ## 1. Get the frame we want
+  start_time, end_time = time_pair[0].get_seconds(), time_pair[1].get_seconds()
   first_frame, last_frame = get_needed_frame(video_target)
   ## 2. Object and Character Detection
-  result_faces, object_description = object_detection(first_frame)
+  result_faces, object_description = object_detection(last_frame)
   ## 4. Background analysis
-  human_des = human_description(first_frame, api_key)
+  human_des = human_description(last_frame, api_key)
   ## 5. Emotional Analysis
   result_face = ""
   for i in range(len(result_faces)):
@@ -644,14 +645,14 @@ def one_snippet_check(video_target, api_key):
   camera_focal_length_description = camera_focal_length(first_frame)
   ## 7. Summarizing
   total_gen_description = object_description + " " + human_des + " " + result_face + " " + camera_action_description
-  return (first_frame, final_summary(total_gen_description, api_key), camera_move_description, camera_focal_length_description)
+  return (start_time, end_time, first_frame, final_summary(total_gen_description, api_key), camera_move_description, camera_focal_length_description)
 
 def video_summarization(full_video, api_key, limit=None):
   st.success("Processing local video file....")
-  scene_list = splitting_video(full_video, AdaptiveDetector())
+  time_list, scene_list = splitting_video(full_video, AdaptiveDetector())
   list_total_result = []
   if limit != None:
     scene_list = scene_list[:limit+1]
-  for video in scene_list:
-    list_total_result.append(one_snippet_check(video, api_key))
+  for i in range(len(scene_list)):
+    list_total_result.append(one_snippet_check(scene_list[i], time_list[i], api_key))
   return list_total_result
