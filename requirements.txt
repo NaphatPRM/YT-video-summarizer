@@ -1,5 +1,6 @@
 streamlit
 streamlit-aggrid
+tf-keras
 numpy
 opencv-contrib-python-headless
 scenedetect[opencv-headless]
