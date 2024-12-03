@@ -450,11 +450,16 @@ def camera_movement(first_frame, last_frame):
 
     if abs(H[0, 0]**2 + H[0, 1]**2 - 1) <= 0.05:
         if abs(H[0, 0] - 1) <= 0.02:
-            return "static"
+          return "static"
         else:
             return f"camera roll in {num_frames} frames"
 
-    # Handle Zoom
+    # Handle Zoom and Push in/out
+    if abs(K[0, 2]) > 0.01 and abs(K[1, 2]) > 0.01:
+      if K[0, 2] > 0:
+        return f"push in within {num_frames} frames by {K[0, 2]} unit"
+      else:
+        return f"push out within {num_frames} frames by {abs(K[0, 2])} unit"
     scale = (H[0, 0] + H[1, 1]) / 2
     offset_x = H[0, 2] / (1 - scale)
     offset_y = H[1, 2] / (1 - scale)
@@ -462,6 +467,8 @@ def camera_movement(first_frame, last_frame):
         return f"zoom in with a scale of {scale:.2f} centered on ({offset_x:.2f}, {offset_y:.2f})"
     else:
         return f"zoom out with a scale of {scale:.2f} centered on ({offset_x:.2f}, {offset_y:.2f})"
+
+    return "Not in scope"
 
 # Predicting the camera movement from the videos
 # Using the testing examples from the hugging face
